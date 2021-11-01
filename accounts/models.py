@@ -55,7 +55,7 @@ class UserManager(BaseUserManager):
             email=email,
             is_staff=is_staff,
             is_superuser=is_superuser,
-            is_active=True,
+            is_active=False,
             date_joined=now,
             **extra_fields
         )
