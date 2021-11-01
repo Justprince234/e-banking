@@ -28,8 +28,6 @@ from .tokens import account_activation_token
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
 from django.core.mail import EmailMessage
-from steplight.settings import account_sid, auth_token
-from twilio.rest import Client
 
 # Change Password
 from .models import User
