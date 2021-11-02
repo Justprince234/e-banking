@@ -44,7 +44,7 @@ class RegisterAPI(generics.GenericAPIView):
         user = serializer.save()
 
         # Confirmation Email Configuration
-        # current_site = get_current_site(request)
+        current_site = get_current_site(request)
         # message = render_to_string('email_confirmation.html', {
         #         'user':user, 
         #         'domain':current_site.domain,
@@ -76,7 +76,11 @@ class RegisterAPI(generics.GenericAPIView):
 
         return Response({
         "user": UserSerializer(user, context=self.get_serializer_context()).data,
-        "token": AuthToken.objects.create(user)[1]
+        "token": AuthToken.objects.create(user)[1],
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+
         })
 
 def activate(request, uidb64, token):
