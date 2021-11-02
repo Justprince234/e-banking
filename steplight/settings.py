@@ -166,9 +166,9 @@ MEDIA_URL = '/photos/photos/'
 
 # Cloudinary stuff
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ['CLOUD_NAME'],
-    'API_KEY': os.environ['API_KEY'],
-    'API_SECRET': os.environ['API_SECRET'],
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('API_KEY'),
+    'API_SECRET': env('API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
