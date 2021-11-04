@@ -49,7 +49,7 @@ admin.site.register(UpdateUser, UpdateUserAdmin)
 
 class InternationalTransferAdmin(admin.ModelAdmin):
 
-    list_display = ('id','to_fullname', 'to_account','transfer_amount', 'transfer_date', 'transaction_id','owner', 'status')
+    list_display = ('id','otp','get_otp','to_fullname', 'to_account','transfer_amount', 'transfer_date', 'transaction_id','owner', 'status')
     list_display_links = ('id', 'owner')
     search_fields = ('owner',)
     list_per_page = 25
@@ -58,7 +58,7 @@ admin.site.register(InternationalTransfer, InternationalTransferAdmin)
 
 class LocalTransferAdmin(admin.ModelAdmin):
 
-    list_display = ('id', 'to_fullname', 'to_account', 'transfer_amount', 'transfer_date', 'transaction_id','owner', 'status')
+    list_display = ('id', 'otp', 'get_otp', 'to_fullname', 'to_account', 'transfer_amount', 'transfer_date', 'transaction_id','owner', 'status')
     list_display_links = ('id', 'owner')
     search_fields = ('owner',)
     list_per_page = 25

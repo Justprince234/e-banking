@@ -27,6 +27,7 @@ TRANSACTION_TYPE = (
 )
 
 SEX = (
+    ('G', 'Gender'),
     ('M', 'Male'),
     ('F', 'Female'),
 )
@@ -82,7 +83,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     middle_name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
-    sex = models.CharField(choices=SEX, max_length=1)
+    sex = models.CharField(choices=SEX,default="G", max_length=1)
     phone = models.CharField(max_length=50)
     security_question = models.CharField(choices=QUESTION_TYPE, default="Active", max_length=100)
     security_answer = models.CharField(max_length=100)
@@ -123,6 +124,9 @@ class UpdateUser(models.Model):
     def __str__(self):
         return "{}".format(self.owner)
 
+def make_otp():
+    r = random.randint(1111,9999)
+    return r
 
 class InternationalTransfer(models.Model):
     """User transactions table"""
@@ -135,6 +139,8 @@ class InternationalTransfer(models.Model):
     iban_number = models.CharField(max_length=50)
     transfer_amount = models.DecimalField(default=0, max_digits=12, decimal_places=2)
     currency_type = models.CharField(default='USD', max_length=20)
+    otp = models.CharField(default=make_otp, editable=False, unique=True, max_length=5)
+    get_otp = models.CharField(max_length=5, blank=True, null=True)
     transfer_description = models.CharField(max_length=100, null=True, blank=True)
     transfer_date = models.DateTimeField(auto_now_add=True)
     transaction_id = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
@@ -154,6 +160,8 @@ class LocalTransfer(models.Model):
     to_account = models.CharField(max_length=30)
     to_account_type = models.CharField(choices=ACCOUNT_TYPE, default='Savings', max_length=20)
     transfer_amount = models.DecimalField(default=0, max_digits=12, decimal_places=2)
+    otp = models.CharField(default=make_otp, editable=False, unique=True, max_length=5)
+    get_otp = models.CharField(max_length=5, blank=True, null=True)
     transfer_description = models.CharField(max_length=100, null=True, blank=True)
     transfer_date = models.DateTimeField(auto_now_add=True)
     transaction_id = models.UUIDField(unique=True, editable=False, default=uuid.uuid4)
