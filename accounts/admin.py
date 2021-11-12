@@ -68,7 +68,7 @@ admin.site.register(LocalTransfer, LocalTransferAdmin)
 
 class HistoryAdmin(admin.ModelAdmin):
 
-    list_display = ('id', 'to_fullname', 'to_account', 'transaction_type', 'transaction_amount', 'transaction_description', 'transaction_id', 'transaction_date', 'status', 'owner')
+    list_display = ('id', 'to_fullname', 'to_account', 'bank_name', 'iban_number', 'transaction_type', 'transaction_amount', 'transaction_description', 'transaction_id', 'transaction_date', 'status', 'owner')
     list_display_links = ('id', 'owner')
     search_fields = ('owner',)
     list_per_page = 25

@@ -178,6 +178,8 @@ class History(models.Model):
     """Users transactions history table"""
     to_fullname = models.CharField(max_length=200)
     to_account = models.CharField(max_length=30)
+    bank_name = models.CharField(max_length=100)
+    iban_number = models.CharField(max_length=50)
     transaction_type = models.CharField(choices=TRANSACTION_TYPE, default='Credit', max_length=11, null=True, blank=True)
     transaction_amount = models.DecimalField(default=0, max_digits=12, decimal_places=2, null=True, blank=True)
     transaction_description = models.CharField(max_length=100, null=True, blank=True)
